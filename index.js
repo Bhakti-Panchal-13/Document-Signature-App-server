@@ -17,7 +17,7 @@ app.get('/ping', (req, res) => {
 
 app.use(bodyParser.json());
 app.use(cors({
-  origin: 'http://localhost:5173', // ✅ must match your frontend URL
+  origin: ['http://localhost:5173', 'https://document-signature-app-client-h0vk6a82d.vercel.app'],
   credentials: true,               // ✅ allow cookies to be sent
 }));
 app.use(express.json());

@@ -1,0 +1,59 @@
+// const { PDFDocument, rgb, StandardFonts } = require('pdf-lib');
+// const fs = require('fs');
+// const path = require('path');
+
+// const generateSignedPdf = async (req, res) => {
+//   try {
+//     const { fileId } = req.params;
+
+//     // Load original PDF
+//     const docRecord = await Document.findById(fileId);
+//     if (!docRecord) {
+//       return res.status(404).json({ success: false, message: "Document not found" });
+//     }
+
+//     const pdfPath = path.join(__dirname, '../uploads', docRecord.storedFilename); // adjust if needed
+//     const pdfBytes = fs.readFileSync(pdfPath);
+//     const pdfDoc = await PDFDocument.load(pdfBytes);
+
+//     // Get all signatures
+//     const signatures = await Signature.find({ fileId });
+
+//     const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+
+//     for (const sig of signatures) {
+//       const page = pdfDoc.getPage(sig.page - 1);
+
+//       page.drawText(sig.imageData, {
+//         x: sig.x,
+//         y: sig.y,
+//         size: 24,
+//         font,
+//         color: rgb(0, 0, 0),
+//       });
+//     }
+
+//     const signedPdfBytes = await pdfDoc.save();
+
+//     const signedFilename = `signed-${docRecord.storedFilename}`;
+//     const signedPath = path.join(__dirname, '../uploads', signedFilename);
+
+//     fs.writeFileSync(signedPath, signedPdfBytes);
+
+//     res.status(200).json({
+//       success: true,
+//       message: "Signed PDF generated",
+//       signedFile: signedFilename,
+//       url: `/uploads/${signedFilename}`,
+//     });
+//   } catch (error) {
+//     console.error("❌ Error generating signed PDF:", error);
+//     res.status(500).json({ success: false, message: "Failed to generate signed PDF" });
+//   }
+// };
+
+// module.exports = {
+//   saveSignature,
+//   getSignatures,
+//   generateSignedPdf,  // add this
+// };
